@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useNavigate } from '@remix-run/react';
+import { useNavigate, Outlet } from '@remix-run/react';
 import { auth } from '~/lib/firebase';
 
-export default function AdminPage() {
+export default function AdminLayout() {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +18,13 @@ export default function AdminPage() {
   return (
     <div style={{ padding: '2rem' }}>
       <h1>관리자 전용 페이지</h1>
-      <p>여기서 프로젝트를 관리할 수 있어요.</p>
+      <nav style={{ marginBottom: '1rem' }}>
+        <a href="/admin/projects">📁 프로젝트 목록</a> |{' '}
+        <a href="/admin/projects/new">➕ 새 프로젝트 등록</a>
+      </nav>
+
+      {/* 🔽 여기에 하위 경로 내용이 렌더링됩니다 */}
+      <Outlet />
     </div>
   );
 }

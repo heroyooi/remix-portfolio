@@ -13,7 +13,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate('/admin');
+      navigate('/admin/projects');
     } catch (err: any) {
       setError('로그인 실패: ' + err.message);
     }
