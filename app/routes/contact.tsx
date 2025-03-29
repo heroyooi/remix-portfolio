@@ -1,20 +1,63 @@
+import { useState } from 'react';
+
 export default function ContactPage() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [result, setResult] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await fetch(
+      'https://us-central1-remix-portfolio.cloudfunctions.net/sendMail',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, message }),
+      }
+    );
+
+    if (res.ok) {
+      setResult('✅ 메일이 성공적으로 전송되었습니다!');
+      setName('');
+      setEmail('');
+      setMessage('');
+    } else {
+      setResult('❌ 메일 전송에 실패했습니다. 다시 시도해주세요.');
+    }
+  };
+
   return (
     <div style={{ padding: '2rem' }}>
       <h1>📬 Contact</h1>
-      <p>아래 경로로 연락 주세요!</p>
-      <ul>
-        <li>
-          Email:{' '}
-          <a href="mailto:heroyooi1018@gmail.com">heroyooi1018@gmail.com</a>
-        </li>
-        <li>
-          GitHub:{' '}
-          <a href="https://github.com/heroyooi" target="_blank">
-            github.com/heroyooi
-          </a>
-        </li>
-      </ul>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="이름"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="email"
+          placeholder="이메일"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br />
+        <textarea
+          placeholder="메시지"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+        />
+        <br />
+        <button type="submit">보내기</button>
+      </form>
+      {result && <p>{result}</p>}
     </div>
   );
 }
