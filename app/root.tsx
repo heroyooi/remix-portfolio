@@ -46,7 +46,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <a href="/">🏠 홈</a>
             <a href="/about">🙋‍♀️ 소개</a>
             <a href="/projects">🧩 프로젝트</a>
-            <a href="/contact">📬 연락처</a>
+            <a href="/contact">📬 문의</a>
+            <a href="/admin/messages">📬 문의 메시지</a>
             <a href="/admin/projects">🔐 관리자</a>
           </nav>
         </header>
