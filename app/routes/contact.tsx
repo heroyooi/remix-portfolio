@@ -23,7 +23,7 @@ export default function ContactPage() {
 
       // ✉️ 2. 이메일 전송
       const res = await fetch(
-        'https://us-central1-remix-portfolio.cloudfunctions.net/sendMail',
+        'https://us-central1-remix-portfolio.cloudfunctions.net/api/sendMail',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -50,29 +50,29 @@ export default function ContactPage() {
       <h1>📬 Contact</h1>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
-          placeholder="이름"
+          type='text'
+          placeholder='이름'
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
         <br />
         <input
-          type="email"
-          placeholder="이메일"
+          type='email'
+          placeholder='이메일'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <br />
         <textarea
-          placeholder="메시지"
+          placeholder='메시지'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
         />
         <br />
-        <button type="submit">보내기</button>
+        <button type='submit'>보내기</button>
       </form>
       {result && <p>{result}</p>}
     </div>
