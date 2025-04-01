@@ -86,7 +86,8 @@ export default function MessageDetailPage() {
         <strong>이메일:</strong> {msg.email}
       </p>
       <p>
-        <strong>메시지:</strong> {msg.message}
+        <strong>메시지:</strong>
+        <div style={{ whiteSpace: 'pre-line' }}>{msg.message}</div>
       </p>
       <p>
         <strong>날짜:</strong>{' '}
@@ -106,7 +107,7 @@ export default function MessageDetailPage() {
         <>
           <hr style={{ margin: '2rem 0' }} />
           <h3>📨 답변 내용</h3>
-          <p>{msg.reply}</p>
+          <div style={{ whiteSpace: 'pre-line' }}>{msg.reply}</div>
           <p style={{ fontSize: '0.9rem', color: '#666' }}>
             답변일:{' '}
             {msg.repliedAt

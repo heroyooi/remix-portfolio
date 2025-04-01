@@ -4,8 +4,14 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 
 const app = express();
+
+app.use(
+  cors({
+    // origin: ['https://remix-hero.vercel.app'], // 안전한 경우
+    origin: true, // 로컬 테스트 시 사용
+  })
+);
 app.use(express.json());
-const corsHandler = cors({ origin: true });
 
 // Nodemailer 설정 (Gmail SMTP 사용)
 const mailTransport = nodemailer.createTransport({
@@ -16,7 +22,7 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
-app.post('/sendMail', corsHandler, (req: Request, res: Response) => {
+app.post('/sendMail', (req: Request, res: Response) => {
   (async () => {
     const { name, email, message } = req.body;
 
@@ -37,7 +43,7 @@ app.post('/sendMail', corsHandler, (req: Request, res: Response) => {
   })();
 });
 
-app.post('/sendReplyMail', corsHandler, (req: Request, res: Response) => {
+app.post('/sendReplyMail', (req: Request, res: Response) => {
   (async () => {
     const { email, reply } = req.body;
 
