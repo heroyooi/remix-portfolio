@@ -7,8 +7,7 @@ const app = express();
 
 app.use(
   cors({
-    // origin: ['https://remix-hero.vercel.app'], // 안전한 경우
-    origin: true, // 로컬 테스트 시 사용
+    origin: true,
   })
 );
 app.use(express.json());
