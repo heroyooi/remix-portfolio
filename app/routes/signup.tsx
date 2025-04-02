@@ -38,7 +38,13 @@ export default function SignupPage() {
       }
     } catch (err: any) {
       console.error('회원가입 실패:', err);
-      setError(err.message || '회원가입 중 오류가 발생했습니다.');
+      if (err.code === 'auth/email-already-in-use') {
+        setError('이미 가입된 이메일입니다. 로그인 페이지로 이동해 주세요.');
+      } else if (err.code === 'auth/weak-password') {
+        setError('비밀번호는 최소 6자리 이상이어야 합니다.');
+      } else {
+        setError(err.message || '회원가입 중 오류가 발생했습니다.');
+      }
     }
   };
 

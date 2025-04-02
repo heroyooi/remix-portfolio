@@ -1,37 +1,49 @@
-import { Form, useActionData, useNavigate } from '@remix-run/react';
-import { json, redirect } from '@remix-run/node';
+import { useState } from 'react';
+import { useNavigate } from '@remix-run/react';
 import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, googleProvider, githubProvider } from '~/lib/firebase.client';
-import { setUserSession } from '~/lib/session.server';
-
-export const action = async ({ request }: any) => {
-  const formData = await request.formData();
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
-
-  try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const token = await userCredential.user.getIdToken();
-
-    const session = await setUserSession(request, token);
-    return redirect('/', {
-      headers: {
-        'Set-Cookie': await sessionStorage.commitSession(session),
-      },
-    });
-  } catch (error: any) {
-    console.error('이메일 로그인 실패:', error);
-    return json({ error: '이메일 또는 비밀번호가 올바르지 않습니다.' });
-  }
-};
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const actionData = useActionData<{ error?: string }>();
+  const [error, setError] = useState<string | null>(null);
+
+  const handleEmailLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const token = await userCredential.user.getIdToken();
+
+      const res = await fetch('/auth/session', {
+        method: 'POST',
+        body: JSON.stringify({ token }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (res.ok) {
+        navigate('/');
+      } else {
+        setError('세션 저장 실패');
+      }
+    } catch (err: any) {
+      console.error('로그인 실패:', err.code, err.message);
+      if (
+        err.code === 'auth/user-not-found' ||
+        err.code === 'auth/wrong-password'
+      ) {
+        setError('이메일 또는 비밀번호가 올바르지 않습니다.');
+      } else {
+        setError('로그인 중 오류가 발생했습니다.');
+      }
+    }
+  };
 
   const handleSocialLogin = async (provider: any) => {
     try {
@@ -57,12 +69,9 @@ export default function LoginPage() {
     <div style={{ maxWidth: 400, margin: '0 auto' }}>
       <h1>🔐 로그인</h1>
 
-      {actionData?.error && (
-        <p style={{ color: 'red', marginBottom: '1rem' }}>{actionData.error}</p>
-      )}
+      {error && <p style={{ color: 'red', marginBottom: '1rem' }}>{error}</p>}
 
-      {/* ✅ 일반 이메일 로그인 */}
-      <Form method='post'>
+      <form onSubmit={handleEmailLogin}>
         <p>
           <label>
             이메일:
@@ -76,11 +85,10 @@ export default function LoginPage() {
           </label>
         </p>
         <button type='submit'>로그인</button>
-      </Form>
+      </form>
 
       <hr style={{ margin: '2rem 0' }} />
 
-      {/* ✅ 소셜 로그인 */}
       <button
         onClick={() => handleSocialLogin(googleProvider)}
         style={{ display: 'block', marginBottom: '1rem' }}
