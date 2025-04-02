@@ -1,11 +1,35 @@
 import {
+  Form,
+  Link,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteLoaderData,
 } from '@remix-run/react';
 import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import { LoaderFunctionArgs, json } from '@remix-run/node';
+import { getUserToken } from '~/lib/session.server';
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const token = await getUserToken(request);
+
+  if (!token) {
+    return json({ user: null });
+  }
+
+  const { getAuth } = await import('firebase-admin/auth');
+  const { firebaseAdmin } = await import('~/lib/firebase.server');
+
+  try {
+    const decoded = await getAuth().verifyIdToken(token);
+    return json({ user: { email: decoded.email } });
+  } catch (error) {
+    console.error('유저 인증 실패:', error);
+    return json({ user: null });
+  }
+}
 
 export const meta: MetaFunction = () => {
   return [
@@ -32,23 +56,45 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useRouteLoaderData('root') as
+    | { user: { email: string } }
+    | undefined;
+  const user = data?.user ?? null;
+
   return (
-    <html lang="en">
+    <html lang='en'>
       <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
         <Meta />
         <Links />
       </head>
       <body>
         <header style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
           <nav style={{ display: 'flex', gap: '1rem' }}>
-            <a href="/">🏠 홈</a>
-            <a href="/about">🙋‍♀️ 소개</a>
-            <a href="/projects">🧩 프로젝트</a>
-            <a href="/contact">📬 문의</a>
-            <a href="/admin/messages">📬 문의 메시지</a>
-            <a href="/admin/projects">🔐 관리자</a>
+            <Link to='/'>🏠 홈</Link>
+            <Link to='/about'>🙋‍♀️ 소개</Link>
+            <Link to='/projects'>🧩 프로젝트</Link>
+            <Link to='/contact'>📬 문의</Link>
+
+            <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem' }}>
+              {user ? (
+                <>
+                  <span>👤 {user.email}</span>
+                  <Form action='/logout' method='post'>
+                    <button type='submit'>🚪 로그아웃</button>
+                  </Form>
+                </>
+              ) : (
+                <>
+                  <Link to='/login'>🔐 로그인</Link>
+                  <Link to='/signup'>📝 회원가입</Link>
+                </>
+              )}
+            </div>
+
+            <a href='/admin/messages'>📬 문의 메시지</a>
+            <a href='/admin/projects'>🔐 관리자</a>
           </nav>
         </header>
 

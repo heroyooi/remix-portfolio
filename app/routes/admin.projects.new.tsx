@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from '@remix-run/react';
-import { db, storage } from '~/lib/firebase';
+import { db, storage } from '~/lib/firebase.client';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 

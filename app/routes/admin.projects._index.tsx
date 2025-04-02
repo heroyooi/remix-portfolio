@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { db } from '~/lib/firebase';
+import { db } from '~/lib/firebase.client';
 import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { Link } from '@remix-run/react';
 

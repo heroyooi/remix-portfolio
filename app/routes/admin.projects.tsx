@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, Outlet } from '@remix-run/react';
-import { auth } from '~/lib/firebase';
+import { auth } from '~/lib/firebase.client';
 
 export default function AdminLayout() {
   const navigate = useNavigate();
@@ -8,7 +8,7 @@ export default function AdminLayout() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
-        navigate('/login');
+        navigate('/admin/login');
       }
     });
 
