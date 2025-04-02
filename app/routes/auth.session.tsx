@@ -1,7 +1,9 @@
 import { json } from '@remix-run/node';
 import { getAuth } from 'firebase-admin/auth';
 import { setUserSession, sessionStorage } from '~/lib/session.server';
-import '~/lib/firebase.server'; // firebaseAdmin 초기화만 해도 OK
+import { initializeFirebaseAdmin } from '~/lib/firebase.server';
+
+initializeFirebaseAdmin();
 
 export async function action({ request }: any) {
   try {
