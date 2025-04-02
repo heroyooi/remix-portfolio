@@ -19,8 +19,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return json({ user: null });
   }
 
+  const { initializeFirebaseAdmin } = await import('~/lib/firebase.server');
   const { getAuth } = await import('firebase-admin/auth');
-  const { firebaseAdmin } = await import('~/lib/firebase.server');
+
+  initializeFirebaseAdmin();
 
   try {
     const decoded = await getAuth().verifyIdToken(token);
