@@ -1,5 +1,4 @@
 import { initializeApp, cert, getApps } from 'firebase-admin/app';
-import { getAuth } from 'firebase-admin/auth';
 
 export function initializeFirebaseAdmin() {
   if (!getApps().length) {
@@ -12,5 +11,3 @@ export function initializeFirebaseAdmin() {
     });
   }
 }
-
-export { getAuth };

@@ -1,14 +1,16 @@
 import { json } from '@remix-run/node';
-import { getAuth } from 'firebase-admin/auth';
 import { setUserSession, sessionStorage } from '~/lib/session.server';
-import { initializeFirebaseAdmin } from '~/lib/firebase.server';
-
-initializeFirebaseAdmin();
 
 export async function action({ request }: any) {
   try {
     const { token } = await request.json();
     console.log('받은 토큰:', token);
+
+    // ✅ 여기가 핵심: 서버 전용 모듈을 동적으로 import
+    const { initializeFirebaseAdmin } = await import('~/lib/firebase.server');
+    const { getAuth } = await import('firebase-admin/auth');
+
+    initializeFirebaseAdmin();
 
     const decoded = await getAuth().verifyIdToken(token);
     const session = await setUserSession(request, token);
