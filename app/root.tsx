@@ -26,7 +26,14 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   try {
     const decoded = await getAuth().verifyIdToken(token);
-    return json({ user: { email: decoded.email } });
+    const email = decoded.email ?? '';
+    const isAdmin = email === process.env.ADMIN_EMAIL;
+    return json({
+      user: {
+        email,
+        isAdmin,
+      },
+    });
   } catch (error) {
     console.error('유저 인증 실패:', error);
     return json({ user: null });
@@ -59,7 +66,7 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const data = useRouteLoaderData('root') as
-    | { user: { email: string } }
+    | { user: { email: string; isAdmin?: boolean } }
     | undefined;
   const user = data?.user ?? null;
 
@@ -78,6 +85,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <Link to='/about'>🙋‍♀️ 소개</Link>
             <Link to='/projects'>🧩 프로젝트</Link>
             <Link to='/contact'>📬 문의</Link>
+            {/* 관리자 전용 메뉴 */}
+            {user?.isAdmin && (
+              <>
+                <Link to='/admin/messages'>📬 문의 메시지</Link>
+                <Link to='/admin/projects'>🔐 관리자</Link>
+              </>
+            )}
 
             <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem' }}>
               {user ? (
@@ -94,9 +108,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 </>
               )}
             </div>
-
-            <a href='/admin/messages'>📬 문의 메시지</a>
-            <a href='/admin/projects'>🔐 관리자</a>
           </nav>
         </header>
 
