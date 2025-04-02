@@ -34,7 +34,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export const meta: MetaFunction = () => {
   return [
     { title: '내 포트폴리오' },
-    { name: 'description', content: '퍼블리셔 팀장의 경력 포트폴리오입니다.' },
+    { name: 'description', content: '퍼블리셔의 경력 포트폴리오입니다.' },
   ];
 };
 
