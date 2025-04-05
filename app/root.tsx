@@ -11,6 +11,7 @@ import {
 import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import { LoaderFunctionArgs, json } from '@remix-run/node';
 import { getUserToken } from '~/lib/session.server';
+import '~/styles/global.scss';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const token = await getUserToken(request);
@@ -71,25 +72,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const user = data?.user ?? null;
 
   return (
-    <html lang='en'>
+    <html lang="en">
       <head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
         <header style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
           <nav style={{ display: 'flex', gap: '1rem' }}>
-            <Link to='/'>🏠 홈</Link>
-            <Link to='/about'>🙋‍♀️ 소개</Link>
-            <Link to='/projects'>🧩 프로젝트</Link>
-            <Link to='/contact'>📬 문의</Link>
+            <Link to="/">🏠 홈</Link>
+            <Link to="/about">🙋‍♀️ 소개</Link>
+            <Link to="/projects">🧩 프로젝트</Link>
+            <Link to="/contact">📬 문의</Link>
             {/* 관리자 전용 메뉴 */}
             {user?.isAdmin && (
               <>
-                <Link to='/admin/messages'>📬 문의 메시지</Link>
-                <Link to='/admin/projects'>🔐 관리자</Link>
+                <Link to="/admin/messages">📬 문의 메시지</Link>
+                <Link to="/admin/projects">🔐 관리자</Link>
               </>
             )}
 
@@ -97,14 +98,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
               {user ? (
                 <>
                   <span>👤 {user.email}</span>
-                  <Form action='/logout' method='post'>
-                    <button type='submit'>🚪 로그아웃</button>
+                  <Form action="/logout" method="post">
+                    <button type="submit">🚪 로그아웃</button>
                   </Form>
                 </>
               ) : (
                 <>
-                  <Link to='/login'>🔐 로그인</Link>
-                  <Link to='/signup'>📝 회원가입</Link>
+                  <Link to="/login">🔐 로그인</Link>
+                  <Link to="/signup">📝 회원가입</Link>
                 </>
               )}
             </div>
