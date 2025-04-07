@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'M사 퍼블리셔 출신 프론트엔드 개발자, 홍길동' },
+    { title: 'M사 퍼블리셔 출신 프론트엔드 개발자, 홍길동 ' },
     {
       name: 'description',
       content:
