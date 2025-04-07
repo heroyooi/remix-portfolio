@@ -1,3 +1,8 @@
+const { vercelPreset } = require('@remix-run/dev');
+
 module.exports = {
-  serverBuildTarget: 'vercel',
+  ...vercelPreset(),
+  future: {
+    v3_routeConvention: true,
+  },
 };
