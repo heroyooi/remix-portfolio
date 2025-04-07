@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'M사 퍼블리셔 출신 프론트엔드 개발자, 홍길동 ' },
+    { title: 'M사 퍼블리셔 출신 프론트엔드 개발자, 홍길동' },
     {
       name: 'description',
       content:
@@ -58,10 +58,10 @@ export default function HomePage() {
           Firebase 기반 솔루션을 만들고 있습니다.
         </p>
         <div className={styles.actions}>
-          <Link to='/projects' className={styles.primaryBtn}>
+          <Link to="/projects" className={styles.primaryBtn}>
             🚀 프로젝트 보기
           </Link>
-          <a href='/resume.pdf' className={styles.secondaryBtn}>
+          <a href="/resume.pdf" className={styles.secondaryBtn}>
             📄 이력서 다운로드
           </a>
         </div>
@@ -103,7 +103,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <Link to='/projects' className={styles.primaryBtn}>
+        <Link to="/projects" className={styles.primaryBtn}>
           전체 프로젝트 보기 →
         </Link>
       </section>
