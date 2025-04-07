@@ -94,7 +94,7 @@ export default function HomePage() {
               />
               <h4>{p.title}</h4>
               <div className={styles.stackList}>
-                {p.techStack.split(',').map((t, i) => (
+                {p.techStack.split(',').map((t: string, i: number) => (
                   <span key={i} className={styles.techBadge}>
                     {t.trim()}
                   </span>
