@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from '@remix-run/react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '~/lib/firebase.client';
+import styles from '~/styles/signup.module.scss';
 
 export default function SignupPage() {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ export default function SignupPage() {
       );
       const token = await userCredential.user.getIdToken();
 
-      // 🔐 서버로 토큰 전달 → 세션 저장
       const res = await fetch('/auth/session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -49,10 +49,10 @@ export default function SignupPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: '0 auto' }}>
+    <div className={styles.signupWrap}>
       <h1>📝 회원가입</h1>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p className={styles.errorMsg}>{error}</p>}
 
       <form onSubmit={handleSignup}>
         <p>
