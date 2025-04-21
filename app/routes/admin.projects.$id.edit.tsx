@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from '@remix-run/react';
 import { db } from '~/lib/firebase.client';
-import {
-  doc,
-  getDoc,
-  updateDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { doc, getDoc, updateDoc, serverTimestamp } from 'firebase/firestore';
+import styles from '~/styles/admin-project-form.module.scss';
 
 export default function EditProjectPage() {
   const navigate = useNavigate();
@@ -18,7 +14,6 @@ export default function EditProjectPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // 기존 데이터 불러오기
   useEffect(() => {
     const fetchProject = async () => {
       if (!id) return;
@@ -59,36 +54,36 @@ export default function EditProjectPage() {
   };
 
   if (loading) return <p>불러오는 중...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (error) return <p className={styles.error}>{error}</p>;
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div className={styles.projectFormWrap}>
       <h2>✏️ 프로젝트 수정</h2>
       <form onSubmit={handleUpdate}>
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="제목"
+          placeholder='제목'
           required
-        /><br />
+        />
         <input
           value={period}
           onChange={(e) => setPeriod(e.target.value)}
-          placeholder="기간"
+          placeholder='기간'
           required
-        /><br />
+        />
         <input
           value={techStack}
           onChange={(e) => setTechStack(e.target.value)}
-          placeholder="기술 스택"
-        /><br />
+          placeholder='기술 스택'
+        />
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="설명"
+          placeholder='설명'
           required
-        /><br />
-        <button type="submit">수정 완료</button>
+        />
+        <button type='submit'>수정 완료</button>
       </form>
     </div>
   );

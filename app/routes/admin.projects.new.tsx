@@ -3,6 +3,7 @@ import { useNavigate } from '@remix-run/react';
 import { db, storage } from '~/lib/firebase.client';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import styles from '~/styles/admin-project-form.module.scss';
 
 export default function NewProjectPage() {
   const navigate = useNavigate();
@@ -17,8 +18,6 @@ export default function NewProjectPage() {
     e.preventDefault();
     try {
       let imageUrl = '';
-
-      // 1. 이미지가 있으면 Firebase Storage에 업로드
       if (image) {
         const storageRef = ref(storage, `projects/${Date.now()}_${image.name}`);
         const snapshot = await uploadBytes(storageRef, image);
@@ -30,33 +29,53 @@ export default function NewProjectPage() {
         description,
         period,
         techStack,
-        imageUrl, // 🔥 이미지 URL 추가
+        imageUrl,
         createdAt: serverTimestamp(),
       });
-      
-      navigate('/admin/projects'); // 등록 후 목록 페이지로 이동
+
+      navigate('/admin/projects');
     } catch (err: any) {
       setError(err.message);
     }
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(e.target.files[0]);
-    }
-  };
-
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>새 프로젝트 등록</h1>
+    <div className={styles.projectFormWrap}>
+      <h1>🆕 새 프로젝트 등록</h1>
       <form onSubmit={handleSubmit}>
-        <input placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} required /><br />
-        <input placeholder="기간 (예: 2022.05 ~ 2023.02)" value={period} onChange={(e) => setPeriod(e.target.value)} required /><br />
-        <input placeholder="기술 스택 (쉼표로 구분)" value={techStack} onChange={(e) => setTechStack(e.target.value)} /><br />
-        <textarea placeholder="설명" value={description} onChange={(e) => setDescription(e.target.value)} required /><br />
-        <input type="file" accept="image/*" onChange={handleImageChange} /><br />
-        <button type="submit">등록하기</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input
+          placeholder='제목'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <input
+          placeholder='기간 (예: 2022.05 ~ 2023.02)'
+          value={period}
+          onChange={(e) => setPeriod(e.target.value)}
+          required
+        />
+        <input
+          placeholder='기술 스택 (쉼표로 구분)'
+          value={techStack}
+          onChange={(e) => setTechStack(e.target.value)}
+        />
+        <textarea
+          placeholder='설명'
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <input
+          type='file'
+          accept='image/*'
+          onChange={(e) => {
+            if (e.target.files && e.target.files[0])
+              setImage(e.target.files[0]);
+          }}
+        />
+        <button type='submit'>등록하기</button>
+        {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
   );
