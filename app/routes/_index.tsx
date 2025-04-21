@@ -3,7 +3,6 @@ import { json } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import styles from '~/styles/home.module.scss';
 import { getTopProjects } from '~/lib/firebase.server';
-import { useEffect, useState } from 'react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -22,31 +21,12 @@ export const loader = async ({}: LoaderFunctionArgs) => {
   return json({ projects });
 };
 
-// 🌙 다크모드 토글
-function ThemeToggle() {
-  const [dark, setDark] = useState(false);
-  useEffect(() => {
-    const root = document.documentElement;
-    dark ? root.classList.add('dark') : root.classList.remove('dark');
-  }, [dark]);
-
-  return (
-    <button
-      onClick={() => setDark((prev) => !prev)}
-      className={styles.darkToggle}
-    >
-      {dark ? '☀️ 라이트 모드' : '🌙 다크 모드'}
-    </button>
-  );
-}
-
 export default function HomePage() {
   const { projects } = useLoaderData<typeof loader>();
 
   return (
     <main className={styles.heroWrap}>
       <section className={styles.hero}>
-        <ThemeToggle /> {/* 다크모드 버튼 */}
         <h1>
           안녕하세요, <br />
           <span className={styles.name}>홍길동</span>입니다.
@@ -58,10 +38,10 @@ export default function HomePage() {
           Firebase 기반 솔루션을 만들고 있습니다.
         </p>
         <div className={styles.actions}>
-          <Link to="/projects" className={styles.primaryBtn}>
+          <Link to='/projects' className={styles.primaryBtn}>
             🚀 프로젝트 보기
           </Link>
-          <a href="/resume.pdf" className={styles.secondaryBtn}>
+          <a href='/resume.pdf' className={styles.secondaryBtn}>
             📄 이력서 다운로드
           </a>
         </div>
@@ -103,7 +83,7 @@ export default function HomePage() {
             </div>
           ))}
         </div>
-        <Link to="/projects" className={styles.primaryBtn}>
+        <Link to='/projects' className={styles.primaryBtn}>
           전체 프로젝트 보기 →
         </Link>
       </section>
