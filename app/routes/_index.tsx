@@ -31,7 +31,12 @@ export default function HomePage() {
           안녕하세요, <br />
           <span className={styles.name}>성연욱</span>입니다.
         </h1>
-        <p className={styles.subtitle}>M사 퍼블리셔 출신 프론트엔드 개발자</p>
+        <p className={styles.subtitle}>
+          <span className={styles.sublogo}>
+            <img src={'/megagong.ico'} alt={'메가공'} />
+          </span>
+          퍼블리셔 출신 프론트엔드 개발자
+        </p>
         <p className={styles.desc}>
           데이터와 사용자 경험 사이의 경계를 연결하는
           <br />

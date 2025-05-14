@@ -24,3 +24,11 @@
     background-color: #efefef;
   }
 }
+
+:global(html.dark) {
+  .projectList {
+    .projectImage {
+      background-color: #1e1e1e;
+    }
+  }
+}
