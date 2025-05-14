@@ -31,6 +31,7 @@ export async function getAllProjects() {
       period: data.period || '',
       techStack: data.techStack || '',
       imageUrl: data.imageUrl || '',
+      portfolioUrl: data.portfolioUrl || '',
       createdAt: data.createdAt?.toDate().toISOString() ?? '',
       updatedAt: data.updatedAt?.toDate().toISOString() ?? '',
     };
@@ -55,6 +56,7 @@ export async function getTopProjects(limit = 3) {
       period: data.period || '',
       techStack: data.techStack || '',
       imageUrl: data.imageUrl || '',
+      portfolioUrl: data.portfolioUrl || '',
       createdAt: data.createdAt?.toDate().toISOString() ?? '',
       updatedAt: data.updatedAt?.toDate().toISOString() ?? '',
     };

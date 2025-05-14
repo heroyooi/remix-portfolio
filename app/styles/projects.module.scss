@@ -9,6 +9,7 @@
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease;
+    border: 1px solid #ddd;
 
     &:hover {
       transform: translateY(-4px);
@@ -26,9 +27,7 @@
 }
 
 :global(html.dark) {
-  .projectList {
-    .projectImage {
-      background-color: #1e1e1e;
-    }
+  .projectCard {
+    background-color: #3b3434;
   }
 }

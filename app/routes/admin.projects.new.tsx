@@ -13,6 +13,7 @@ export default function NewProjectPage() {
   const [techStack, setTechStack] = useState('');
   const [error, setError] = useState('');
   const [image, setImage] = useState<File | null>(null);
+  const [portfolioUrl, setPortfolioUrl] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ export default function NewProjectPage() {
         period,
         techStack,
         imageUrl,
+        portfolioUrl,
         createdAt: serverTimestamp(),
       });
 
@@ -65,6 +67,11 @@ export default function NewProjectPage() {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
+        />
+        <input
+          placeholder='포트폴리오 링크 (예: https://example.com)'
+          value={portfolioUrl}
+          onChange={(e) => setPortfolioUrl(e.target.value)}
         />
         <input
           type='file'

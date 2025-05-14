@@ -13,6 +13,7 @@ export default function EditProjectPage() {
   const [techStack, setTechStack] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [portfolioUrl, setPortfolioUrl] = useState('');
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -26,6 +27,7 @@ export default function EditProjectPage() {
         setDescription(data.description);
         setPeriod(data.period);
         setTechStack(data.techStack);
+        setPortfolioUrl(data.portfolioUrl || '');
       } else {
         setError('해당 프로젝트를 찾을 수 없습니다.');
       }
@@ -45,6 +47,7 @@ export default function EditProjectPage() {
         description,
         period,
         techStack,
+        portfolioUrl,
         updatedAt: serverTimestamp(),
       });
       navigate('/admin/projects');
@@ -82,6 +85,11 @@ export default function EditProjectPage() {
           onChange={(e) => setDescription(e.target.value)}
           placeholder='설명'
           required
+        />
+        <input
+          value={portfolioUrl}
+          onChange={(e) => setPortfolioUrl(e.target.value)}
+          placeholder='포트폴리오 링크 (예: https://example.com)'
         />
         <button type='submit'>수정 완료</button>
       </form>

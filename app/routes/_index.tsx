@@ -56,13 +56,23 @@ export default function HomePage() {
       <section className={styles.stackSection}>
         <h2>🛠 기술 스택</h2>
         <div className={styles.stackList}>
-          {['React', 'Next.js', 'Remix', 'Firebase', 'SCSS', 'TypeScript'].map(
-            (tech) => (
-              <span key={tech} className={styles.techBadge}>
-                {tech}
-              </span>
-            )
-          )}
+          {[
+            'JS',
+            'React.js',
+            'Next.js',
+            'Remix',
+            'Firebase',
+            'SCSS',
+            'TypeScript',
+            'HTML',
+            'CSS',
+            'jQuery',
+            'AI',
+          ].map((tech) => (
+            <span key={tech} className={styles.techBadge}>
+              {tech}
+            </span>
+          ))}
         </div>
       </section>
 
@@ -70,23 +80,42 @@ export default function HomePage() {
       <section className={styles.projectPreview}>
         <h2>📂 최신 프로젝트</h2>
         <div className={styles.projectCards}>
-          {projects.map((p) => (
-            <div key={p.id} className={styles.projectCard}>
-              <img
-                src={p.imageUrl || '/logo-light.png'}
-                alt={p.title}
-                className={styles.projectImage}
-              />
-              <h4>{p.title}</h4>
-              <div className={styles.stackList}>
-                {p.techStack.split(',').map((t: string, i: number) => (
-                  <span key={i} className={styles.techBadge}>
-                    {t.trim()}
-                  </span>
-                ))}
+          {projects.map((p) => {
+            const CardContent = (
+              <>
+                <img
+                  src={p.imageUrl || '/logo-light.png'}
+                  alt={p.title}
+                  className={styles.projectImage}
+                />
+                <h4>{p.title}</h4>
+                <div className={styles.stackList}>
+                  {p.techStack.split(',').map((t: string, i: number) => (
+                    <span key={i} className={styles.techBadge}>
+                      {t.trim()}
+                    </span>
+                  ))}
+                </div>
+              </>
+            );
+
+            return p.portfolioUrl ? (
+              <a
+                key={p.id}
+                href={p.portfolioUrl}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={styles.projectCard}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                {CardContent}
+              </a>
+            ) : (
+              <div key={p.id} className={styles.projectCard}>
+                {CardContent}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
         <Link to='/projects' className={styles.primaryBtn}>
           전체 프로젝트 보기 →

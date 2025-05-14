@@ -83,6 +83,18 @@
   background-color: #bbb;
 }
 
+.portfolioLink {
+  display: inline-block;
+  margin-top: 4px;
+  color: #0070f3;
+  font-weight: bold;
+  text-decoration: underline;
+
+  &:hover {
+    color: #0051c3;
+  }
+}
+
 html.dark .projectItem {
   border-color: #444;
 }

@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { db } from '~/lib/firebase.client';
-import { collection, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+} from 'firebase/firestore';
+
 import { Link } from '@remix-run/react';
 import styles from '~/styles/admin-project-list.module.scss';
 
@@ -11,6 +19,7 @@ type Project = {
   period: string;
   techStack: string;
   imageUrl: string;
+  portfolioUrl?: string;
 };
 
 export default function ProjectListPage() {
@@ -18,7 +27,8 @@ export default function ProjectListPage() {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      const snapshot = await getDocs(collection(db, 'projects'));
+      const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
       const result: Project[] = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -58,6 +68,17 @@ export default function ProjectListPage() {
                 <span>{project.period}</span>
                 <br />
                 <span>{project.techStack}</span>
+                <br />
+                {project.portfolioUrl && (
+                  <a
+                    href={project.portfolioUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={styles.portfolioLink}
+                  >
+                    🔗 포트폴리오 보기
+                  </a>
+                )}
                 <div className={styles.actionButtons}>
                   <Link to={`/admin/projects/${project.id}/edit`}>✏️ 수정</Link>
                   <button onClick={() => handleDelete(project.id)}>

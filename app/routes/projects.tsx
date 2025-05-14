@@ -52,6 +52,25 @@ export default function ProjectsPage() {
                   </span>
                 ))}
             </p>
+            {project.portfolioUrl && (
+              <p>
+                <a
+                  href={project.portfolioUrl}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  style={{
+                    display: 'inline-block',
+                    marginTop: '0.5rem',
+                    color: '#0070f3',
+                    textDecoration: 'underline',
+                    fontWeight: 'bold',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  🔗 포트폴리오 링크 보기
+                </a>
+              </p>
+            )}
 
             <p style={{ fontSize: '0.8rem', color: '#888' }}>
               등록일: {new Date(project.createdAt).toLocaleDateString()}
