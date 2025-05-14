@@ -29,7 +29,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         <h1>
           안녕하세요, <br />
-          <span className={styles.name}>홍길동</span>입니다.
+          <span className={styles.name}>성연욱</span>입니다.
         </h1>
         <p className={styles.subtitle}>M사 퍼블리셔 출신 프론트엔드 개발자</p>
         <p className={styles.desc}>

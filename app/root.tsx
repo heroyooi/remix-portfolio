@@ -13,6 +13,8 @@ import { LoaderFunctionArgs, json } from '@remix-run/node';
 import { getUserToken } from '~/lib/session.server';
 import ThemeToggle from '~/components/ThemeToggle';
 import '~/styles/global.scss';
+import styles from '~/styles/root.module.scss';
+import { useEffect, useState } from 'react';
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const token = await getUserToken(request);
@@ -72,6 +74,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
     typeof document !== 'undefined'
       ? document.documentElement.classList.contains('dark')
       : false;
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const body = document.body;
+
+    if (menuOpen) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = '';
+    }
+
+    return () => {
+      body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
   return (
     <html lang='en' className={isDark ? 'dark' : ''}>
@@ -82,38 +99,56 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <header style={{ padding: '1rem', borderBottom: '1px solid #ccc' }}>
-          <nav style={{ display: 'flex', gap: '1rem' }}>
-            <Link to='/'>🏠 홈</Link>
-            <Link to='/about'>🙋‍♀️ 소개</Link>
-            <Link to='/projects'>🧩 프로젝트</Link>
-            <Link to='/contact'>📬 문의</Link>
-            {/* 관리자 전용 메뉴 */}
-            {user?.isAdmin && (
-              <>
-                <Link to='/admin/messages'>📬 문의 메시지</Link>
-                <Link to='/admin/projects'>🔐 관리자</Link>
-              </>
-            )}
+        <header className={styles.header}>
+          <div className={styles.header_inner}>
+            <h1 className={styles.logo}>
+              <Link to='/'>🏠 퍼블리싱 폴포츠</Link>
+            </h1>
 
-            <div style={{ marginLeft: 'auto', display: 'flex', gap: '1rem' }}>
-              <ThemeToggle />
-              {user ? (
+            <button
+              className={`${styles.menu_toggle} ${menuOpen ? styles.open : ''}`}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              {menuOpen ? '✖' : '☰'}
+            </button>
+
+            <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
+              <Link to='/about'>🙋‍♀️ 소개</Link>
+              <Link to='/projects'>🧩 프로젝트</Link>
+              <Link to='/contact'>📬 문의</Link>
+              {user?.isAdmin && (
                 <>
-                  <span>👤 {user.email}</span>
-                  <Form action='/logout' method='post'>
-                    <button type='submit'>🚪 로그아웃</button>
-                  </Form>
-                </>
-              ) : (
-                <>
-                  <Link to='/login'>🔐 로그인</Link>
-                  <Link to='/signup'>📝 회원가입</Link>
+                  <Link to='/admin/messages'>📬 문의 메시지</Link>
+                  <Link to='/admin/projects'>🔐 관리자</Link>
                 </>
               )}
-            </div>
-          </nav>
+              <div className={styles.auth}>
+                <ThemeToggle />
+                {user ? (
+                  <>
+                    <span>👤 {user.email}</span>
+                    <Form action='/logout' method='post'>
+                      <button type='submit'>🚪 로그아웃</button>
+                    </Form>
+                  </>
+                ) : (
+                  <>
+                    <Link to='/login'>🔐 로그인</Link>
+                    <Link to='/signup'>📝 회원가입</Link>
+                  </>
+                )}
+              </div>
+            </nav>
+          </div>
         </header>
+
+        {/* ✅ 메뉴 오픈 시 딤 처리 */}
+        {menuOpen && (
+          <div
+            className={`${styles.overlay} ${styles.show}`}
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
 
         <main style={{ padding: '2rem' }}>
           <Outlet />
@@ -126,7 +161,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             marginTop: '2rem',
           }}
         >
-          <p>© {new Date().getFullYear()} 내 이름. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} 성연욱. All rights reserved.</p>
         </footer>
         <ScrollRestoration />
         <Scripts />
