@@ -46,6 +46,29 @@
   line-height: 1.6;
 }
 
+.highlightBox {
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.25rem 1.75rem;
+  background: linear-gradient(to right, #f0f4ff, #e4f0ff);
+  border-left: 6px solid #4f80ff;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #222;
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.08);
+  transition: background 0.3s ease;
+}
+
+.highlightTech {
+  color: #265cff;
+  font-weight: 700;
+  background: rgba(38, 92, 255, 0.08);
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 1px rgba(38, 92, 255, 0.2);
+}
+
 .actions {
   display: flex;
   justify-content: center;
@@ -136,6 +159,23 @@
 }
 
 :global(html.dark) {
+  .subtitle {
+    color: #fff;
+  }
+  .desc {
+    color: #fff;
+  }
+  .highlightBox {
+    background: linear-gradient(to right, #1e293b, #263548);
+    color: #eee;
+    border-left-color: #60a5fa;
+  }
+
+  .highlightTech {
+    color: #93c5fd;
+    background: rgba(147, 197, 253, 0.1);
+    box-shadow: inset 0 0 0 1px rgba(147, 197, 253, 0.2);
+  }
   .projectCard {
     background-color: #3b3434;
   }

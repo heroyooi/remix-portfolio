@@ -6,11 +6,11 @@ import { getTopProjects } from '~/lib/firebase.server';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: 'M사 퍼블리셔 출신 프론트엔드 개발자, 홍길동 ' },
+    { title: 'M사 퍼블리셔 출신 프론트엔드 개발자, 성연욱 ' },
     {
       name: 'description',
       content:
-        '데이터와 사용자 경험 사이의 경계를 연결하는 Firebase 기반 솔루션을 만들고 있습니다.',
+        '퍼블리셔 출신 프론트엔드 개발자 성연욱입니다. UI/UX 구현 경험과 Firebase 기반의 프론트엔드 솔루션을 통해 사용자 중심의 웹을 개발합니다.',
     },
   ];
 };
@@ -38,10 +38,29 @@ export default function HomePage() {
           퍼블리셔 출신 프론트엔드 개발자
         </p>
         <p className={styles.desc}>
-          데이터와 사용자 경험 사이의 경계를 연결하는
+          12년 가까운 퍼블리싱 경험을 바탕으로, <br />
+          HTML/CSS/JavaScript의 정교한 구현력을 갖춘 프론트엔드 개발자입니다.{' '}
           <br />
-          Firebase 기반 솔루션을 만들고 있습니다.
+          사용자 경험과 인터랙션, 그리고 Firebase 기반의 데이터 흐름까지 <br />
+          <strong>디자인과 구현의 경계를 연결하는</strong> 웹 솔루션을 만듭니다.
         </p>
+
+        <div className={styles.highlightBox}>
+          <p>
+            이 포트폴리오 사이트는{' '}
+            <strong className={styles.highlightTech}>
+              React 기반 Remix 프레임워크
+            </strong>
+            를 활용하여 제작되었으며,
+            <br />
+            관리자 기능과 문의 시스템까지{' '}
+            <strong className={styles.highlightTech}>
+              Firebase 기반의 풀스택 구조
+            </strong>
+            로 직접 개발하였습니다.
+          </p>
+        </div>
+
         <div className={styles.actions}>
           <Link to='/projects' className={styles.primaryBtn}>
             🚀 프로젝트 보기

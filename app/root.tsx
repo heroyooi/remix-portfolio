@@ -46,8 +46,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: '내 포트폴리오' },
-    { name: 'description', content: '퍼블리셔의 경력 포트폴리오입니다.' },
+    { title: '성연욱 포트폴리오' },
+    {
+      name: 'description',
+      content: '퍼블리셔 성연욱의 경력 포트폴리오입니다.',
+    },
   ];
 };
 
@@ -90,6 +93,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
     };
   }, [menuOpen]);
 
+  const handleNavClick = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <html lang='en' className={isDark ? 'dark' : ''}>
       <head>
@@ -113,17 +120,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </button>
 
             <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
-              <Link to='/about'>🙋‍♀️ 소개</Link>
-              <Link to='/projects'>🧩 프로젝트</Link>
-              <Link to='/contact'>📬 문의</Link>
+              <Link to='/about' onClick={handleNavClick}>
+                🙋‍♀️ 소개
+              </Link>
+              <Link to='/projects' onClick={handleNavClick}>
+                🧩 프로젝트
+              </Link>
+              <Link to='/contact' onClick={handleNavClick}>
+                📬 문의
+              </Link>
               {user?.isAdmin && (
                 <>
-                  <Link to='/admin/messages'>📬 문의 메시지</Link>
-                  <Link to='/admin/projects'>🔐 관리자</Link>
+                  <Link to='/admin/messages' onClick={handleNavClick}>
+                    📬 문의 메시지
+                  </Link>
+                  <Link to='/admin/projects' onClick={handleNavClick}>
+                    🔐 관리자
+                  </Link>
                 </>
               )}
               <div className={styles.auth}>
-                <ThemeToggle />
                 {user ? (
                   <>
                     <span>👤 {user.email}</span>
@@ -133,10 +149,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   </>
                 ) : (
                   <>
-                    <Link to='/login'>🔐 로그인</Link>
-                    <Link to='/signup'>📝 회원가입</Link>
+                    <Link to='/login' onClick={handleNavClick}>
+                      🔐 로그인
+                    </Link>
+                    <Link to='/signup' onClick={handleNavClick}>
+                      📝 회원가입
+                    </Link>
                   </>
                 )}
+                <ThemeToggle />
               </div>
             </nav>
           </div>

@@ -34,7 +34,7 @@ export default function ThemeToggle() {
         transition: 'color 0.3s ease',
       }}
     >
-      {dark ? '☀️ 라이트 모드' : '🌙 다크 모드'}
+      {dark ? '☀️' : '🌙'}
     </button>
   );
 }

@@ -34,23 +34,15 @@ export default function ProjectsPage() {
             </p>
             <p>
               <strong>기술 스택:</strong>{' '}
-              {project.techStack
-                .split(',')
-                .map((tech: string, index: number) => (
-                  <span
-                    key={index}
-                    style={{
-                      display: 'inline-block',
-                      background: '#eee',
-                      padding: '0.2rem 0.5rem',
-                      marginRight: '0.5rem',
-                      borderRadius: '0.5rem',
-                      fontSize: '0.85rem',
-                    }}
-                  >
-                    {tech.trim()}
-                  </span>
-                ))}
+              <div className={styles.stackList}>
+                {project.techStack
+                  .split(',')
+                  .map((tech: string, index: number) => (
+                    <span key={index} className={styles.techBadge}>
+                      {tech.trim()}
+                    </span>
+                  ))}
+              </div>
             </p>
             {project.portfolioUrl && (
               <p>
