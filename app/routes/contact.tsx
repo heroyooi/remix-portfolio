@@ -16,9 +16,13 @@ export default function ContactPage() {
   const [email, setEmail] = useState(userEmail);
   const [message, setMessage] = useState('');
   const [result, setResult] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
 
     try {
       await addDoc(collection(db, 'messages'), {
@@ -49,6 +53,8 @@ export default function ContactPage() {
     } catch (error) {
       console.error('오류:', error);
       setResult('❌ 메시지 저장 또는 메일 전송 중 오류가 발생했습니다.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -57,27 +63,29 @@ export default function ContactPage() {
       <h1>📬 Contact</h1>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
-          placeholder="이름"
+          type='text'
+          placeholder='이름'
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
         <input
-          type="email"
-          placeholder="이메일"
+          type='email'
+          placeholder='이메일'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           readOnly={isAuthenticated}
           required
         />
         <textarea
-          placeholder="메시지"
+          placeholder='메시지'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required
         />
-        <button type="submit">보내기</button>
+        <button type='submit' disabled={isSubmitting}>
+          {isSubmitting ? '전송 중...' : '보내기'}
+        </button>
       </form>
       {result && <p>{result}</p>}
     </div>
