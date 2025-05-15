@@ -46,19 +46,22 @@ export default function HomePage() {
         </p>
 
         <div className={styles.highlightBox}>
-          <p>
-            이 포트폴리오 사이트는{' '}
-            <strong className={styles.highlightTech}>
-              React 기반 Remix 프레임워크
-            </strong>
-            를 활용하여 제작되었으며,
-            <br />
-            관리자 기능과 문의 시스템까지{' '}
-            <strong className={styles.highlightTech}>
-              Firebase 기반의 풀스택 구조
-            </strong>
-            로 직접 개발하였습니다.
-          </p>
+          <div className={styles.highlightIcon}>🚀</div>
+          <div className={styles.highlightText}>
+            <p>
+              이 포트폴리오 사이트는{' '}
+              <strong className={styles.highlightTech}>
+                React 기반 Remix 프레임워크
+              </strong>
+              를 활용하여 제작되었으며,
+              <br />
+              관리자 기능과 문의 시스템까지{' '}
+              <strong className={styles.highlightTech}>
+                Firebase 기반의 풀스택 구조
+              </strong>
+              로 직접 개발하였습니다.
+            </p>
+          </div>
         </div>
 
         <div className={styles.actions}>

@@ -14,11 +14,14 @@
     &:hover {
       transform: translateY(-4px);
     }
+    p strong {
+      display: block;
+    }
     .stackList {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
     }
     .techBadge {
       background: #e0e0e0;
@@ -34,6 +37,7 @@
     width: 100%;
     height: 180px;
     object-fit: cover;
+    object-position: top;
     border-radius: 8px;
     margin-bottom: 1rem;
     background-color: #efefef;

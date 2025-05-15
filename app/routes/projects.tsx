@@ -27,7 +27,15 @@ export default function ProjectsPage() {
             <h3>{project.title}</h3>
 
             <p>
-              <strong>설명:</strong> {project.description}
+              <strong>설명:</strong>{' '}
+              {project.description
+                .split('\n')
+                .map((line: string, idx: number) => (
+                  <span key={idx}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
             </p>
             <p>
               <strong>기간:</strong> {project.period}
