@@ -18,7 +18,7 @@ export async function getAllProjects() {
   const db = getFirestore();
   const snapshot = await db
     .collection('projects')
-    .orderBy('createdAt', 'desc')
+    .orderBy('order', 'asc')
     .get();
 
   return snapshot.docs.map((doc) => {
@@ -43,7 +43,7 @@ export async function getTopProjects(limit = 3) {
   const db = getFirestore();
   const snapshot = await db
     .collection('projects')
-    .orderBy('createdAt', 'desc')
+    .orderBy('order', 'asc')
     .limit(limit)
     .get();
 

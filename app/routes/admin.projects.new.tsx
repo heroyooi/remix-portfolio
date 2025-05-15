@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from '@remix-run/react';
 import { db, storage } from '~/lib/firebase.client';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  getDocs,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import styles from '~/styles/admin-project-form.module.scss';
 
@@ -25,17 +30,25 @@ export default function NewProjectPage() {
         imageUrl = await getDownloadURL(snapshot.ref);
       }
 
-      await addDoc(collection(db, 'projects'), {
+      const snapshot = await getDocs(collection(db, 'projects'));
+      const docs = snapshot.docs;
+      const orderValues = docs
+        .map((doc) => doc.data().order)
+        .filter((v) => typeof v === 'number');
+      const minOrder = orderValues.length > 0 ? Math.min(...orderValues) : 0;
+
+      const docRef = await addDoc(collection(db, 'projects'), {
         title,
         description,
         period,
         techStack,
         imageUrl,
         portfolioUrl,
+        order: minOrder - 1,
         createdAt: serverTimestamp(),
       });
 
-      navigate('/admin/projects');
+      navigate(`/admin/projects?new=${docRef.id}`);
     } catch (err: any) {
       setError(err.message);
     }
