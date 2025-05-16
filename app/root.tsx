@@ -119,7 +119,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta property='og:type' content='website' />
 
         {/* ✅ Twitter 카드 */}
-        <meta name='twitter:card' content='summary_large_image' />
+        <meta
+          name='twitter:card'
+          content='https://remix-hero.vercel.app/syw_frontend.png'
+        />
         <meta name='twitter:title' content='성연욱 포트폴리오' />
         <meta
           name='twitter:description'
@@ -200,15 +203,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Outlet />
         </main>
 
-        <footer
-          style={{
-            padding: '1rem',
-            borderTop: '1px solid #ccc',
-            marginTop: '2rem',
-          }}
-        >
+        <footer className={styles.footer}>
           <p>© {new Date().getFullYear()} 성연욱. All rights reserved.</p>
         </footer>
+
         <ScrollRestoration />
         <Scripts />
       </body>

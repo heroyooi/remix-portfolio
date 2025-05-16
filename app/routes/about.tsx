@@ -3,7 +3,7 @@ import styles from '~/styles/about-page.module.scss';
 export default function AboutPage() {
   return (
     <div className={styles.container}>
-      <h1 className={styles.heading}>🙋‍♀️ About Me</h1>
+      <h1 className={styles.heading}>🙋‍♀️ 소개</h1>
 
       <section className={styles.section}>
         <p>
@@ -12,7 +12,7 @@ export default function AboutPage() {
           활동하고 있는 <strong>12년차 웹 전문가</strong>입니다.
         </p>
         <p>
-          Megagong에서 퍼블리싱 리드를 맡으며 대형 교육 플랫폼의 UI/UX를
+          메가공무원에서 퍼블리싱 리드를 맡으며 대형 교육 플랫폼의 UI/UX를
           총괄하고, 팀원들과 함께 효율적인 작업 환경을 만들기 위해 끊임없이
           고민해왔습니다.
         </p>
@@ -37,7 +37,7 @@ export default function AboutPage() {
               <span className={styles.sublogo}>
                 <img src={'/megagong.ico'} alt={'메가공'} />
               </span>
-              megagong 퍼블리싱 리드
+              메가공무원 퍼블리싱 리드
             </div>
           </li>
           <li>프론트엔드: React, Remix, Next.js, TypeScript</li>

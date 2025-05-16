@@ -14,7 +14,7 @@ export default function ProjectsPage() {
 
   return (
     <div className={styles.wrapper}>
-      <h1>🧩 프로젝트 모음</h1>
+      <h1>🧩 프로젝트</h1>
       <div className={styles.projectList}>
         {projects.map((project) => (
           <div key={project.id} className={styles.projectCard}>

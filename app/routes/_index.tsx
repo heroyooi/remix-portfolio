@@ -39,7 +39,7 @@ export default function HomePage() {
         </p>
         <p className={styles.desc}>
           12년 가까운 퍼블리싱 경험을 바탕으로, <br />
-          HTML/CSS/JavaScript의 정교한 구현력을 갖춘 프론트엔드 개발자입니다.{' '}
+          HTML/CSS/JavaScript의 정교한 구현력을 갖춘 프론트엔드 개발자입니다.
           <br />
           사용자 경험과 인터랙션, 그리고 Firebase 기반의 데이터 흐름까지 <br />
           <strong>디자인과 구현의 경계를 연결하는</strong> 웹 솔루션을 만듭니다.
@@ -49,13 +49,13 @@ export default function HomePage() {
           <div className={styles.highlightIcon}>🚀</div>
           <div className={styles.highlightText}>
             <p>
-              이 포트폴리오 사이트는{' '}
+              이 포트폴리오 사이트는
               <strong className={styles.highlightTech}>
                 React 기반 Remix 프레임워크
               </strong>
               를 활용하여 제작되었으며,
               <br />
-              관리자 기능과 문의 시스템까지{' '}
+              관리자 기능과 문의 시스템, 그리고 포트폴리오 등록 기능까지
               <strong className={styles.highlightTech}>
                 Firebase 기반의 풀스택 구조
               </strong>
@@ -68,7 +68,11 @@ export default function HomePage() {
           <Link to='/projects' className={styles.primaryBtn}>
             🚀 프로젝트 보기
           </Link>
-          <a href='/resume.pdf' className={styles.secondaryBtn}>
+          <a
+            href='javascript:void(0);'
+            className={styles.secondaryBtn}
+            onClick={() => alert('이력서 준비중입니다.')}
+          >
             📄 이력서 다운로드
           </a>
         </div>

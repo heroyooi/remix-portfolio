@@ -143,8 +143,14 @@
   pointer-events: auto;
 }
 
-html.menu-open body {
-  overflow: hidden;
+.footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+  border-top: 1px solid #ccc;
+  font-size: 0.9rem;
+  color: #666;
+  background-color: #f9f9f9;
 }
 
 :global(html.dark) {
@@ -164,5 +170,14 @@ html.menu-open body {
     .menu_toggle {
       color: #ddd;
     }
+    .logo {
+      color: #fff;
+    }
+  }
+
+  .footer {
+    border-top: 1px solid #444;
+    background-color: #1e1e1e;
+    color: #aaa;
   }
 }

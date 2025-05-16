@@ -60,7 +60,7 @@ export default function ContactPage() {
 
   return (
     <div className={styles.formWrap}>
-      <h1>📬 Contact</h1>
+      <h1>📬 문의</h1>
       <form onSubmit={handleSubmit}>
         <input
           type='text'
