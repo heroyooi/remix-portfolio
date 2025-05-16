@@ -12,6 +12,7 @@ import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import { LoaderFunctionArgs, json } from '@remix-run/node';
 import { getUserToken } from '~/lib/session.server';
 import ThemeToggle from '~/components/ThemeToggle';
+import TopButton from '~/components/TopButton';
 import '~/styles/global.scss';
 import styles from '~/styles/root.module.scss';
 import { useEffect, useState } from 'react';
@@ -137,7 +138,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <header className={styles.header}>
           <div className={styles.header_inner}>
             <h1 className={styles.logo}>
-              <Link to='/'>Syw.Frontend</Link>
+              <Link to='/' onClick={handleNavClick}>
+                Syw.Frontend
+              </Link>
             </h1>
 
             <button
@@ -202,6 +205,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <main style={{ padding: '2rem' }}>
           <Outlet />
         </main>
+
+        <TopButton />
 
         <footer className={styles.footer}>
           <p>© {new Date().getFullYear()} 성연욱. All rights reserved.</p>
