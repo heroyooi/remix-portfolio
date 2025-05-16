@@ -100,11 +100,12 @@
 }
 
 .primaryBtn {
-  background: #0070f3;
-  color: #fff;
+  background: linear-gradient(135deg, #0070f3, #60a5fa);
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 118, 255, 0.39);
 
   &:hover {
-    background: #005ac1;
+    background: linear-gradient(135deg, #005ac1, #3b82f6);
   }
 }
 
@@ -217,6 +218,6 @@
     box-shadow: 0 4px 12px rgba(0, 112, 243, 0.08);
   }
   50% {
-    box-shadow: 0 6px 16px rgba(0, 112, 243, 0.15);
+    box-shadow: 0 6px 18px rgba(0, 112, 243, 0.12);
   }
 }
