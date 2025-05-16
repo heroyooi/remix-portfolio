@@ -81,6 +81,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    const today = new Date().toISOString().split('T')[0]; // "2025-05-17"
+    const lastVisit = localStorage.getItem('lastVisited');
+
+    if (lastVisit === today) return; // 오늘 이미 기록했으면 카운트 안 함
+
+    fetch('/api/increase-visitor', { method: 'POST' });
+    localStorage.setItem('lastVisited', today);
+  }, []);
+
+  useEffect(() => {
     const body = document.body;
 
     if (menuOpen) {
@@ -99,46 +109,46 @@ export function Layout({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <html lang='en' className={isDark ? 'dark' : ''}>
+    <html lang="en" className={isDark ? 'dark' : ''}>
       <head>
-        <meta charSet='utf-8' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
 
         {/* ✅ OG 태그 수동 삽입 */}
-        <meta property='og:title' content='성연욱 포트폴리오' />
+        <meta property="og:title" content="성연욱 포트폴리오" />
         <meta
-          property='og:description'
-          content='퍼블리셔 성연욱의 경력 포트폴리오입니다.'
+          property="og:description"
+          content="퍼블리셔 성연욱의 경력 포트폴리오입니다."
         />
         <meta
-          property='og:image'
-          content='https://remix-hero.vercel.app/syw_frontend.png'
+          property="og:image"
+          content="https://remix-hero.vercel.app/syw_frontend.png"
         />
-        <meta property='og:url' content='https://remix-hero.vercel.app' />
-        <meta property='og:type' content='website' />
+        <meta property="og:url" content="https://remix-hero.vercel.app" />
+        <meta property="og:type" content="website" />
 
         {/* ✅ Twitter 카드 */}
         <meta
-          name='twitter:card'
-          content='https://remix-hero.vercel.app/syw_frontend.png'
+          name="twitter:card"
+          content="https://remix-hero.vercel.app/syw_frontend.png"
         />
-        <meta name='twitter:title' content='성연욱 포트폴리오' />
+        <meta name="twitter:title" content="성연욱 포트폴리오" />
         <meta
-          name='twitter:description'
-          content='퍼블리셔 성연욱의 경력 포트폴리오입니다.'
+          name="twitter:description"
+          content="퍼블리셔 성연욱의 경력 포트폴리오입니다."
         />
         <meta
-          name='twitter:image'
-          content='https://remix-hero.vercel.app/syw_frontend.png'
+          name="twitter:image"
+          content="https://remix-hero.vercel.app/syw_frontend.png"
         />
       </head>
       <body>
         <header className={styles.header}>
           <div className={styles.header_inner}>
             <h1 className={styles.logo}>
-              <Link to='/' onClick={handleNavClick}>
+              <Link to="/" onClick={handleNavClick}>
                 Syw.Frontend
               </Link>
             </h1>
@@ -151,22 +161,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </button>
 
             <nav className={`${styles.nav} ${menuOpen ? styles.open : ''}`}>
-              <Link to='/about' onClick={handleNavClick}>
+              <Link to="/about" onClick={handleNavClick}>
                 🙋‍♀️ 소개
               </Link>
-              <Link to='/projects' onClick={handleNavClick}>
+              <Link to="/projects" onClick={handleNavClick}>
                 🧩 프로젝트
               </Link>
-              <Link to='/contact' onClick={handleNavClick}>
+              <Link to="/contact" onClick={handleNavClick}>
                 📬 문의
               </Link>
               {user?.isAdmin && (
                 <>
-                  <Link to='/admin/messages' onClick={handleNavClick}>
+                  <Link to="/admin/messages" onClick={handleNavClick}>
                     📬 문의 메시지
                   </Link>
-                  <Link to='/admin/projects' onClick={handleNavClick}>
-                    🔐 관리자
+                  <Link to="/admin/projects" onClick={handleNavClick}>
+                    🔐 프로젝트 등록록
+                  </Link>
+                  <Link to="/admin/analytics" onClick={handleNavClick}>
+                    📊 방문자 수
                   </Link>
                 </>
               )}
@@ -174,16 +187,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 {user ? (
                   <>
                     <span>👤 {user.email}</span>
-                    <Form action='/logout' method='post'>
-                      <button type='submit'>🚪 로그아웃</button>
+                    <Form action="/logout" method="post">
+                      <button type="submit">🚪 로그아웃</button>
                     </Form>
                   </>
                 ) : (
                   <>
-                    <Link to='/login' onClick={handleNavClick}>
+                    <Link to="/login" onClick={handleNavClick}>
                       🔐 로그인
                     </Link>
-                    <Link to='/signup' onClick={handleNavClick}>
+                    <Link to="/signup" onClick={handleNavClick}>
                       📝 회원가입
                     </Link>
                   </>

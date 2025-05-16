@@ -69,11 +69,11 @@ export default function HomePage() {
           </div>
 
           <div className={styles.actions}>
-            <Link to='/projects' className={styles.primaryBtn}>
+            <Link to="/projects" className={styles.primaryBtn}>
               🚀 프로젝트 보기
             </Link>
             <a
-              href='javascript:void(0);'
+              href="#"
               className={styles.secondaryBtn}
               onClick={() => alert('이력서 준비중입니다.')}
             >
@@ -133,8 +133,8 @@ export default function HomePage() {
                 <a
                   key={p.id}
                   href={p.portfolioUrl}
-                  target='_blank'
-                  rel='noopener noreferrer'
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={styles.projectCard}
                   style={{ textDecoration: 'none', color: 'inherit' }}
                 >
@@ -147,7 +147,7 @@ export default function HomePage() {
               );
             })}
           </div>
-          <Link to='/projects' className={styles.primaryBtn}>
+          <Link to="/projects" className={styles.primaryBtn}>
             전체 프로젝트 보기 →
           </Link>
         </section>
