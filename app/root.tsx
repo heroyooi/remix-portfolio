@@ -176,7 +176,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                     📬 문의 메시지
                   </Link>
                   <Link to="/admin/projects" onClick={handleNavClick}>
-                    🔐 프로젝트 등록록
+                    🔐 프로젝트 등록
                   </Link>
                   <Link to="/admin/analytics" onClick={handleNavClick}>
                     📊 방문자 수
