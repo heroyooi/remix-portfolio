@@ -104,12 +104,37 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <Meta />
         <Links />
+
+        {/* ✅ OG 태그 수동 삽입 */}
+        <meta property='og:title' content='성연욱 포트폴리오' />
+        <meta
+          property='og:description'
+          content='퍼블리셔 성연욱의 경력 포트폴리오입니다.'
+        />
+        <meta
+          property='og:image'
+          content='https://remix-hero.vercel.app/syw_frontend.png'
+        />
+        <meta property='og:url' content='https://remix-hero.vercel.app' />
+        <meta property='og:type' content='website' />
+
+        {/* ✅ Twitter 카드 */}
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='성연욱 포트폴리오' />
+        <meta
+          name='twitter:description'
+          content='퍼블리셔 성연욱의 경력 포트폴리오입니다.'
+        />
+        <meta
+          name='twitter:image'
+          content='https://remix-hero.vercel.app/syw_frontend.png'
+        />
       </head>
       <body>
         <header className={styles.header}>
           <div className={styles.header_inner}>
             <h1 className={styles.logo}>
-              <Link to='/'>🏠 퍼블리싱 폴포츠</Link>
+              <Link to='/'>Syw.Frontend</Link>
             </h1>
 
             <button

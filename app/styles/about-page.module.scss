@@ -1,0 +1,50 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.7;
+  color: #333;
+
+  .heading {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+  }
+
+  .subheading {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .list {
+    padding-left: 1.2rem;
+    list-style-type: disc;
+  }
+
+  .square {
+    list-style-type: square;
+  }
+
+  .current {
+    display: flex;
+    gap: 0 5px;
+    .sublogo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      background-color: #fff;
+      border: 1px solid #0070f3;
+      border-radius: 50%;
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}

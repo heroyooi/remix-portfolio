@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
 .header {
   position: relative;
   z-index: 10;
@@ -13,8 +15,25 @@
   }
 
   .logo {
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: transparent;
+    color: #1c1f2a;
+
+    &::before {
+      content: '<';
+      margin-right: 2px;
+    }
+
+    &::after {
+      content: ' />';
+      margin-left: 2px;
+    }
+
+    span {
+      color: #1c1f2a;
+    }
   }
 
   .menu_toggle {
@@ -49,6 +68,7 @@
       display: flex;
       gap: 1rem;
       margin-left: auto;
+      align-items: center;
     }
 
     transition: transform 0.3s ease, opacity 0.3s ease;
