@@ -32,12 +32,6 @@
   color: #000;
 }
 
-html.dark .loginWrap input {
-  background-color: #2a2a2a;
-  border-color: #444;
-  color: #fff;
-}
-
 .loginWrap button {
   padding: 0.75rem;
   background-color: #5b6eff;
@@ -58,4 +52,12 @@ html.dark .loginWrap input {
   text-align: center;
   color: red;
   font-size: 0.95rem;
+}
+
+:global(html.dark) {
+  .loginWrap input {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #fff;
+  }
 }

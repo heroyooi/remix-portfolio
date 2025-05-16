@@ -65,11 +65,9 @@ html.dark .loginWrap input {
   background-color: #eee;
   color: #222;
   margin-bottom: 0.75rem;
-}
-
-html.dark .loginWrap .socialBtn {
-  background-color: #444;
-  color: #fff;
+  &:hover {
+    color: #fff;
+  }
 }
 
 .loginWrap .errorMsg {
@@ -83,4 +81,11 @@ html.dark .loginWrap .socialBtn {
   margin: 2rem 0;
   border: none;
   border-top: 1px solid #ccc;
+}
+
+:global(html.dark) {
+  .loginWrap .socialBtn {
+    background-color: #444;
+    color: #fff;
+  }
 }
