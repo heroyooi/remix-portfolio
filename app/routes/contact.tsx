@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '~/lib/firebase.client';
 import { useRouteLoaderData } from '@remix-run/react';
+import Layout from '~/components/Layout';
 import styles from '~/styles/contact.module.scss';
 
 export default function ContactPage() {
@@ -59,35 +60,37 @@ export default function ContactPage() {
   };
 
   return (
-    <div className={styles.formWrap}>
-      <h1>📬 문의</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type='text'
-          placeholder='이름'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type='email'
-          placeholder='이메일'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          readOnly={isAuthenticated}
-          required
-        />
-        <textarea
-          placeholder='메시지'
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          required
-        />
-        <button type='submit' disabled={isSubmitting}>
-          {isSubmitting ? '전송 중...' : '보내기'}
-        </button>
-      </form>
-      {result && <p>{result}</p>}
-    </div>
+    <Layout>
+      <div className={styles.formWrap}>
+        <h1>📬 문의</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type='text'
+            placeholder='이름'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type='email'
+            placeholder='이메일'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            readOnly={isAuthenticated}
+            required
+          />
+          <textarea
+            placeholder='메시지'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+          />
+          <button type='submit' disabled={isSubmitting}>
+            {isSubmitting ? '전송 중...' : '보내기'}
+          </button>
+        </form>
+        {result && <p>{result}</p>}
+      </div>
+    </Layout>
   );
 }

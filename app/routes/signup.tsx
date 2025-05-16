@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from '@remix-run/react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '~/lib/firebase.client';
+import Layout from '~/components/Layout';
 import styles from '~/styles/signup.module.scss';
 
 export default function SignupPage() {
@@ -49,26 +50,28 @@ export default function SignupPage() {
   };
 
   return (
-    <div className={styles.signupWrap}>
-      <h1>📝 회원가입</h1>
+    <Layout>
+      <div className={styles.signupWrap}>
+        <h1>📝 회원가입</h1>
 
-      {error && <p className={styles.errorMsg}>{error}</p>}
+        {error && <p className={styles.errorMsg}>{error}</p>}
 
-      <form onSubmit={handleSignup}>
-        <p>
-          <label>
-            이메일:
-            <input type='email' name='email' required />
-          </label>
-        </p>
-        <p>
-          <label>
-            비밀번호:
-            <input type='password' name='password' required />
-          </label>
-        </p>
-        <button type='submit'>가입하기</button>
-      </form>
-    </div>
+        <form onSubmit={handleSignup}>
+          <p>
+            <label>
+              이메일:
+              <input type='email' name='email' required />
+            </label>
+          </p>
+          <p>
+            <label>
+              비밀번호:
+              <input type='password' name='password' required />
+            </label>
+          </p>
+          <button type='submit'>가입하기</button>
+        </form>
+      </div>
+    </Layout>
   );
 }

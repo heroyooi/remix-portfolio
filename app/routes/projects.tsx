@@ -1,6 +1,7 @@
 import { useLoaderData } from '@remix-run/react';
 import { getAllProjects } from '~/lib/firebase.server';
 import { json } from '@remix-run/node';
+import Layout from '~/components/Layout';
 import styles from '~/styles/projects.module.scss';
 
 export const loader = async () => {
@@ -13,6 +14,7 @@ export default function ProjectsPage() {
   const { projects } = useLoaderData<typeof loader>();
 
   return (
+    <Layout>
     <div className={styles.wrapper}>
       <h1>🧩 프로젝트</h1>
       <div className={styles.projectList}>
@@ -78,6 +80,6 @@ export default function ProjectsPage() {
           </div>
         ))}
       </div>
-    </div>
+    </div></Layout>
   );
 }

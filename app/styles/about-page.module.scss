@@ -48,3 +48,9 @@
     }
   }
 }
+
+:global(html.dark) {
+  .container {
+    color: #fff;
+  }
+}
